@@ -1,6 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { CreateMLCEngine, MLCEngine, ChatCompletionMessageParam } from '@mlc-ai/web-llm';
 import { Message, ModelStatus, ModelLoadProgress } from '@/lib/types';
+
+type MLCEngine = any;
+type ChatCompletionMessageParam = {
+  role: string;
+  content: string;
+};
 
 export function useLLM() {
   const [engine, setEngine] = useState<MLCEngine | null>(null);
@@ -26,10 +31,11 @@ export function useLLM() {
     const startTime = Date.now();
 
     try {
+      const { CreateMLCEngine } = await import('@mlc-ai/web-llm');
       const selectedModel = 'gemma-2-2b-it-q4f16_1-MLC';
 
       const newEngine = await CreateMLCEngine(selectedModel, {
-        initProgressCallback: (progress) => {
+        initProgressCallback: (progress: any) => {
           const elapsed = Math.floor((Date.now() - startTime) / 1000);
           setLoadProgress({
             progress: progress.progress,
