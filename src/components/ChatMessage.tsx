@@ -1,6 +1,7 @@
 import { Message } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { MarkdownContent } from './MarkdownContent';
 
 interface ChatMessageProps {
   message: Message;
@@ -25,12 +26,13 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
             : 'bg-card text-card-foreground border border-border'
         )}
       >
-        <div className="text-[15px] leading-relaxed whitespace-pre-wrap break-words">
-          {message.content}
-          {isStreaming && (
-            <span className="inline-block w-2 h-4 ml-1 bg-accent animate-pulse" />
-          )}
-        </div>
+        {isUser ? (
+          <div className="text-[15px] leading-relaxed whitespace-pre-wrap break-words">
+            {message.content}
+          </div>
+        ) : (
+          <MarkdownContent content={message.content} isStreaming={isStreaming} />
+        )}
       </div>
     </motion.div>
   );
