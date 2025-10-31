@@ -99,8 +99,11 @@ export function ChatInput({ onSend, disabled = false, placeholder = 'Type your m
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 200)}px`;
+      textareaRef.current.style.height = '80px';
+      const scrollHeight = textareaRef.current.scrollHeight;
+      if (scrollHeight > 80) {
+        textareaRef.current.style.height = `${Math.min(scrollHeight, 200)}px`;
+      }
     }
   }, [input]);
 
@@ -147,25 +150,25 @@ export function ChatInput({ onSend, disabled = false, placeholder = 'Type your m
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
             disabled={disabled}
-            className="pr-24 md:pr-20 text-[15px] md:text-base resize-none min-h-[52px] md:min-h-[44px] max-h-[200px]"
+            className="pr-20 text-[15px] md:text-base resize-none min-h-[80px] max-h-[200px]"
             autoComplete="off"
             rows={1}
           />
-          <div className="absolute bottom-3 right-2 flex gap-0.5">
+          <div className="absolute bottom-2 right-2 flex gap-1">
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={disabled}
-              className="p-3 md:p-2 text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation"
+              className="p-1.5 text-muted-foreground hover:text-muted-foreground/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              <Paperclip className="w-5 h-5 md:w-5 md:h-5" />
+              <Paperclip className="w-5 h-5" />
             </button>
             <button
               type="submit"
               disabled={disabled || (!input.trim() && attachments.length === 0)}
-              className="p-3 md:p-2 text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation"
+              className="p-1.5 text-muted-foreground hover:text-muted-foreground/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              <PaperPlaneRight className="w-5 h-5 md:w-5 md:h-5" />
+              <PaperPlaneRight className="w-5 h-5" />
             </button>
           </div>
         </div>
