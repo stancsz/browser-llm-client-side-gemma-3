@@ -1,8 +1,16 @@
+export interface Attachment {
+  name: string;
+  content: string;
+  type: string;
+  size: number;
+}
+
 export interface Message {
   id: string;
   role: 'user' | 'assistant';
   content: string;
   timestamp: number;
+  attachments?: Attachment[];
 }
 
 export interface ChatHistory {

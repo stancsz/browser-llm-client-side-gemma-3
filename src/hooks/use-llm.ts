@@ -65,10 +65,21 @@ export function useLLM() {
       setStatus('generating');
 
       try {
-        const chatMessages: ChatCompletionMessageParam[] = messages.map((msg) => ({
-          role: msg.role,
-          content: msg.content,
-        }));
+        const chatMessages: ChatCompletionMessageParam[] = messages.map((msg) => {
+          let content = msg.content;
+          
+          if (msg.attachments && msg.attachments.length > 0) {
+            const attachmentContent = msg.attachments
+              .map((att) => `\n\n[File: ${att.name}]\n${att.content}`)
+              .join('\n');
+            content = content + attachmentContent;
+          }
+          
+          return {
+            role: msg.role,
+            content,
+          };
+        });
 
         const completion = await engineRef.current.chat.completions.create({
           messages: chatMessages,

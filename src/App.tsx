@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useLLM } from '@/hooks/use-llm';
 import { useChatHistory } from '@/hooks/use-chat-history';
-import { Message } from '@/lib/types';
+import { Message, Attachment } from '@/lib/types';
 import { ChatHeader } from '@/components/ChatHeader';
 import { ChatMessages } from '@/components/ChatMessages';
 import { ChatInput } from '@/components/ChatInput';
@@ -44,7 +44,7 @@ function App() {
 
 
   const handleSend = useCallback(
-    async (content: string) => {
+    async (content: string, attachments?: Attachment[]) => {
       let chatId = currentChatId;
       if (!chatId) {
         chatId = createNewChat();
@@ -55,6 +55,7 @@ function App() {
         role: 'user',
         content,
         timestamp: Date.now(),
+        attachments,
       };
 
       const assistantMessageId = `assistant-${Date.now()}`;
