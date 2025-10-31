@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
 import { PaperPlaneRight, Paperclip, X } from '@phosphor-icons/react';
 import { Attachment } from '@/lib/types';
 import { toast } from 'sonner';
@@ -130,7 +129,7 @@ export function ChatInput({ onSend, disabled = false, placeholder = 'Type your m
           ))}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="flex gap-2 p-4">
+      <form onSubmit={handleSubmit} className="p-4">
         <input
           ref={fileInputRef}
           type="file"
@@ -139,35 +138,37 @@ export function ChatInput({ onSend, disabled = false, placeholder = 'Type your m
           multiple
           accept=".txt,.md,.json,.csv,.xml,.html,.css,.js,.ts,.tsx,.jsx,text/*"
         />
-        <Button
-          type="button"
-          variant="outline"
-          size="icon"
-          onClick={() => fileInputRef.current?.click()}
-          disabled={disabled}
-          className="self-end"
-        >
-          <Paperclip className="w-5 h-5" />
-        </Button>
-        <Textarea
-          ref={textareaRef}
-          id="chat-input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder={placeholder}
-          disabled={disabled}
-          className="flex-1 text-[15px] resize-none min-h-[44px] max-h-[200px]"
-          autoComplete="off"
-          rows={1}
-        />
-        <Button
-          type="submit"
-          disabled={disabled || (!input.trim() && attachments.length === 0)}
-          className="bg-accent text-accent-foreground hover:bg-accent/90 self-end"
-        >
-          <PaperPlaneRight className="w-5 h-5" />
-        </Button>
+        <div className="relative">
+          <Textarea
+            ref={textareaRef}
+            id="chat-input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder={placeholder}
+            disabled={disabled}
+            className="pr-20 text-[15px] resize-none min-h-[44px] max-h-[200px]"
+            autoComplete="off"
+            rows={1}
+          />
+          <div className="absolute bottom-2 right-2 flex gap-1">
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={disabled}
+              className="p-2 text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <Paperclip className="w-5 h-5" />
+            </button>
+            <button
+              type="submit"
+              disabled={disabled || (!input.trim() && attachments.length === 0)}
+              className="p-2 text-accent hover:text-accent/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <PaperPlaneRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );
