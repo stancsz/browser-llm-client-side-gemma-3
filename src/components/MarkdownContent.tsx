@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
-import { marked } from 'marked';
+import { Button } from '@/compon
 import { Button } from '@/components/ui/button';
 import { Copy, Check } from '@phosphor-icons/react';
-import { toast } from 'sonner';
+interface MarkdownContentProps 
 
-interface MarkdownContentProps {
-  content: string;
-  isStreaming?: boolean;
 }
+  content: string;
+    if (!contentRef.curr
+ 
 
-export function MarkdownContent({ content, isStreaming = false }: MarkdownContentProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+      });
+      if (contentRef.current) {
+      }
 
-  useEffect(() => {
+
     if (!contentRef.current) return;
 
     const renderMarkdown = async () => {
@@ -24,45 +24,45 @@ export function MarkdownContent({ content, isStreaming = false }: MarkdownConten
       
       if (contentRef.current) {
         contentRef.current.innerHTML = html;
-      }
+      c
     };
 
     renderMarkdown();
 
     const codeBlocks = contentRef.current.querySelectorAll('pre');
-    codeBlocks.forEach((pre, index) => {
-      if (pre.querySelector('.code-header')) return;
+      
+        try {
 
-      const code = pre.querySelector('code');
-      const language = code?.className.match(/language-(\w+)/)?.[1] || 'text';
+          setTimeout(() => setCopiedIndex(nul
+          toast.error('Failed to copy code');
       
-      const header = document.createElement('div');
-      header.className = 'code-header flex justify-between items-center px-3 py-2 bg-muted/50 border-b border-border rounded-t-md text-xs text-muted-foreground';
-      
-      const langLabel = document.createElement('span');
-      langLabel.textContent = language;
-      langLabel.className = 'font-medium';
-      
-      const copyBtn = document.createElement('button');
-      copyBtn.className = 'copy-btn flex items-center gap-1.5 px-2 py-1 rounded hover:bg-muted transition-colors text-muted-foreground hover:text-foreground';
-      copyBtn.dataset.index = String(index);
-      
-      header.appendChild(langLabel);
-      header.appendChild(copyBtn);
-      
-      pre.parentNode?.insertBefore(header, pre);
-      pre.classList.add('!mt-0', '!rounded-t-none');
-    });
 
-    const handleCopy = async (e: Event) => {
-      const target = e.target as HTMLElement;
-      const button = target.closest('.copy-btn') as HTMLButtonElement;
-      if (!button) return;
 
-      const index = parseInt(button.dataset.index || '0');
-      const pre = contentRef.current?.querySelectorAll('pre')[index];
-      const code = pre?.querySelector('code');
       
+  }, [content]);
+  useEffect(() => {
+
+    co
+      btn.innerHTML = isCopied
+        : '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 256 256"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,
+  }, [copiedIndex]);
+  retu
+      <div ref={contentRef} classNam
+        <span className="inline-bl
+    </
+}
+
+
+
+
+
+
+
+
+
+
+
+
       if (code) {
         try {
           await navigator.clipboard.writeText(code.textContent || '');
