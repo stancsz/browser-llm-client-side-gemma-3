@@ -151,7 +151,7 @@ export function ChatInput({ onSend, disabled = false, placeholder = 'Type your m
             autoComplete="off"
             rows={1}
           />
-          <div className="absolute bottom-2 right-2 flex gap-0.5">
+          <div className="absolute bottom-3 right-2 flex gap-0.5">
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
@@ -163,7 +163,7 @@ export function ChatInput({ onSend, disabled = false, placeholder = 'Type your m
             <button
               type="submit"
               disabled={disabled || (!input.trim() && attachments.length === 0)}
-              className="p-3 md:p-2 text-accent hover:text-accent/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation"
+              className="p-3 md:p-2 text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation"
             >
               <PaperPlaneRight className="w-5 h-5 md:w-5 md:h-5" />
             </button>
