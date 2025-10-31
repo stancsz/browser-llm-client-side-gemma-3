@@ -29,19 +29,19 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   useEffect(() => {
-    const currentChat = getCurrentChat();
+    if (!currentChatId || !chatHistories) {
+      setMessages([]);
+      return;
+    }
+    const currentChat = chatHistories.find((chat) => chat.id === currentChatId);
     if (currentChat) {
       setMessages(currentChat.messages);
     } else {
       setMessages([]);
     }
-  }, [currentChatId, getCurrentChat]);
+  }, [currentChatId, chatHistories]);
 
-  useEffect(() => {
-    if (currentChatId && messages.length > 0) {
-      updateChatMessages(currentChatId, messages);
-    }
-  }, [messages, currentChatId, updateChatMessages]);
+
 
   const handleSend = useCallback(
     async (content: string) => {
@@ -78,30 +78,40 @@ function App() {
             )
           );
         });
+
+        setMessages((finalMessages) => {
+          updateChatMessages(chatId!, finalMessages);
+          return finalMessages;
+        });
       } catch (err) {
         const errorMsg = err instanceof Error ? err.message : 'Failed to generate response';
         toast.error(errorMsg);
-        setMessages((prev) =>
-          prev.map((msg) =>
+        setMessages((prev) => {
+          const updatedMessages = prev.map((msg) =>
             msg.id === assistantMessageId
               ? { ...msg, content: `Error: ${errorMsg}` }
               : msg
-          )
-        );
+          );
+          updateChatMessages(chatId!, updatedMessages);
+          return updatedMessages;
+        });
       } finally {
         setStreamingMessageId(undefined);
       }
     },
-    [messages, generate, currentChatId, createNewChat]
+    [messages, generate, currentChatId, createNewChat, updateChatMessages]
   );
 
   const handleClear = useCallback(async () => {
+    if (currentChatId) {
+      updateChatMessages(currentChatId, []);
+    }
     setMessages([]);
     setStreamingMessageId(undefined);
     setCurrentChatId(null);
     await resetEngine();
     toast.success('Conversation cleared');
-  }, [resetEngine, setCurrentChatId]);
+  }, [resetEngine, setCurrentChatId, currentChatId, updateChatMessages]);
 
   const handleRetry = useCallback(() => {
     initializeEngine();
