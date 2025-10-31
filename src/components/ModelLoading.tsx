@@ -22,9 +22,9 @@ export function ModelLoading({ progress }: ModelLoadingProps) {
               className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full"
             />
           </div>
-          <h2 className="text-xl font-semibold">Loading Gemma 3 Model</h2>
+          <h2 className="text-xl font-semibold">Loading GemmaChat</h2>
           <p className="text-sm text-muted-foreground">
-            Downloading model files to your browser...
+            Downloading AI model to your browser - 100% private & local
           </p>
         </div>
 
@@ -40,9 +40,9 @@ export function ModelLoading({ progress }: ModelLoadingProps) {
         </div>
 
         <div className="bg-muted rounded-lg p-4 space-y-2">
-          <p className="text-xs font-medium">First-time setup</p>
+          <p className="text-xs font-medium">🔒 Privacy First</p>
           <p className="text-xs text-muted-foreground">
-            The model is being cached in your browser. Subsequent loads will be much faster.
+            The model is stored in your browser only. Your conversations never leave your device.
           </p>
         </div>
       </div>

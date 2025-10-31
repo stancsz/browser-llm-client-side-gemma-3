@@ -53,8 +53,8 @@ export function ChatHeader({ status, onClear, messageCount }: ChatHeaderProps) {
     <div className="border-b border-border bg-card">
       <div className="px-4 py-4 flex items-center justify-between">
         <div className="space-y-1">
-          <h1 className="text-2xl font-semibold tracking-tight">Gemma 3 Browser AI</h1>
-          <p className="text-sm text-muted-foreground">Client-side AI powered by WebGPU</p>
+          <h1 className="text-2xl font-semibold tracking-tight">GemmaChat</h1>
+          <p className="text-sm text-muted-foreground">Free, private AI chat • 100% client-side • Your data never leaves your device</p>
         </div>
         <div className="flex items-center gap-3">
           {getStatusBadge()}

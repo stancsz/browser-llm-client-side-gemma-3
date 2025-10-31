@@ -1,11 +1,11 @@
 # Planning Guide
 
-A browser-based AI chat interface that runs Google's Gemma 3 model entirely client-side using WebGPU, enabling private, offline AI conversations without server dependencies.
+GemmaChat - A free, privacy-first browser-based AI chat application that runs Google's Gemma 3 model entirely client-side using WebGPU, enabling completely private, offline AI conversations with zero data sharing.
 
 **Experience Qualities**:
-1. **Empowering** - Users control their AI experience locally without sending data to servers
-2. **Approachable** - Clean, minimalist interface that demystifies AI technology
-3. **Responsive** - Immediate feedback during model loading and inference operations
+1. **Empowering** - Users control their AI experience locally without sending data to servers, ensuring complete privacy
+2. **Approachable** - Clean, minimalist interface that demystifies AI technology and emphasizes trustworthiness
+3. **Transparent** - Clear communication about privacy, data handling, and the client-side nature of the application
 
 **Complexity Level**: Light Application (multiple features with basic state)
   - Handles model downloading, chat history, and streaming responses with WebGPU acceleration while maintaining a focused user experience

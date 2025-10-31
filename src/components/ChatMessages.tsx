@@ -23,9 +23,25 @@ export function ChatMessages({ messages, streamingMessageId }: ChatMessagesProps
   if (messages.length === 0) {
     return (
       <div className="flex-1 flex items-center justify-center text-muted-foreground">
-        <div className="text-center space-y-2">
-          <p className="text-lg font-medium">Start a conversation</p>
-          <p className="text-sm">Ask me anything!</p>
+        <div className="text-center space-y-4 max-w-md px-4">
+          <div className="space-y-2">
+            <p className="text-lg font-medium text-foreground">Welcome to GemmaChat</p>
+            <p className="text-sm">Ask me anything - your conversation is completely private</p>
+          </div>
+          <div className="flex items-center justify-center gap-6 text-xs">
+            <div className="flex items-center gap-1">
+              <span>🔒</span>
+              <span>100% Private</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <span>⚡</span>
+              <span>Client-side</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <span>🆓</span>
+              <span>Free Forever</span>
+            </div>
+          </div>
         </div>
       </div>
     );
