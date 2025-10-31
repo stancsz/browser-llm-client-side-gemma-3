@@ -1,22 +1,22 @@
 import { useKV } from '@github/spark/hooks';
 import { useCallback } from 'react';
-import { useCallback } from 'react';
+export function useChatHistory() {
 
-  const [currentChatId, setCurrent
+export function useChatHistory() {
   const [chatHistories, setChatHistories] = useKV<ChatHistory[]>('chat-histories', []);
   const [currentChatId, setCurrentChatId] = useKV<string | null>('current-chat-id', null);
 
-
-    setCurrentChatId(newChat.id);
-  }, [setChatHistories, setCurr
-  const updateChatMessag
-      setChatHistor
-          if (chat.id === ch
-              messages.lengt
-      
+  const createNewChat = useCallback(() => {
+    const newChat: ChatHistory = {
+    };
+      title: 'New Chat',
+    setCurrentChatI
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
 
     setChatHistories((prev) => [newChat, ...prev]);
-    setCurrentChatId(newChat.id);
+            const title =
     return newChat.id;
   }, [setChatHistories, setCurrentChatId]);
 
@@ -32,40 +32,29 @@ import { useCallback } from 'react';
 
             return {
               ...chat,
-    [setChatHistories, 
-              title,
-              updatedAt: Date.now(),
-            };
-  }, [setCh
-          return chat;
-    if (!c
-      );
-    },
-    [setChatHistories]
-    
 
     link.href = url;
-    (chatId: string) => {
-      setChatHistories((prev) => prev.filter((chat) => chat.id !== chatId));
-      setCurrentChatId((currentId) => (currentId === chatId ? null : currentId));
-  }, [
-    [setChatHistories, setCurrentChatId]
+    document.body.appendChild(link);
+    document.b
+  }, [chatH
+  const importFromJSON
+      retu
+        
+      
+            if (import
     
 
-  const clearAllChats = useCallback(() => {
-    setChatHistories([]);
-            const importedC
-  }, [setChatHistories, setCurrentChatId]);
+          }
+        reader.onerror = 
+      });
+    [setChatHistories, setCurrentChatId]
 
-  const getCurrentChat = useCallback(() => {
-    if (!currentChatId) return null;
-    return chatHistories.find((chat) => chat.id === currentChatId) || null;
-  }, [currentChatId, chatHistories]);
+    chatHistories,
+    
 
-  const exportToJSON = useCallback(() => {
-    const dataStr = JSON.stringify(chatHistories, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
+    clearAllChats,
+    exportToJSON,
+  };
 
 
 
@@ -79,8 +68,9 @@ import { useCallback } from 'react';
 
 
 
+    link.href = url;
 
-
+    document.body.appendChild(link);
 
 
 
@@ -100,17 +90,25 @@ import { useCallback } from 'react';
 
 
 
+          }
+
+
+
+      });
+
+    [setChatHistories, setCurrentChatId]
+
+
+
+    chatHistories,
 
 
 
 
 
+    clearAllChats,
 
+    exportToJSON,
 
-
-
-
-
-
-
+  };
 
