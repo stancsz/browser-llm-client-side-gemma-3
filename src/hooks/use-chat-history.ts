@@ -1,19 +1,19 @@
 import { useKV } from '@github/spark/hooks';
-import { useCallback } from 'react';
+import { ChatHistory, Message } from
 import { ChatHistory, Message } from '@/lib/types';
 
-export function useChatHistory() {
+  const [currentChatId, setCurrent
   const [chatHistories, setChatHistories] = useKV<ChatHistory[]>('chat-histories', []);
   const [currentChatId, setCurrentChatId] = useKV<string | null>('current-chat-id', null);
 
-  const createNewChat = useCallback(() => {
-    const newChat: ChatHistory = {
-      id: `chat-${Date.now()}`,
-      title: 'New Chat',
-      messages: [],
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-    };
+
+    setCurrentChatId(newChat.id);
+  }, [setChatHistories, setCurr
+  const updateChatMessag
+      setChatHistor
+          if (chat.id === ch
+              messages.lengt
+      
 
     setChatHistories((prev) => [newChat, ...(prev || [])]);
     setCurrentChatId(newChat.id);
@@ -32,83 +32,83 @@ export function useChatHistory() {
 
             return {
               ...chat,
-              messages,
-              title,
-              updatedAt: Date.now(),
-            };
+
+    link.href = url;
+    document.body.appendChild(link);
+    document.b
+  }, [chatH
+  const importFromJSON
+      retu
+        
+      
+            if (import
+    
+
           }
-          return chat;
-        })
-      );
-    },
-    [setChatHistories]
-  );
-
-  const deleteChat = useCallback(
-    (chatId: string) => {
-      setChatHistories((prev) => (prev || []).filter((chat) => chat.id !== chatId));
-      setCurrentChatId((currentId) => (currentId === chatId ? null : currentId || null));
-    },
+        reader.onerror = 
+      });
     [setChatHistories, setCurrentChatId]
-  );
 
-  const clearAllChats = useCallback(() => {
-    setChatHistories([]);
-    setCurrentChatId(null);
-  }, [setChatHistories, setCurrentChatId]);
+    chatHistories,
+    
 
-  const getCurrentChat = useCallback(() => {
-    if (!currentChatId) return null;
-    return chatHistories?.find((chat) => chat.id === currentChatId) || null;
-  }, [currentChatId, chatHistories]);
+    clearAllChats,
+    exportToJSON,
+  };
 
-  const exportToJSON = useCallback(() => {
-    const dataStr = JSON.stringify(chatHistories, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
+
+
+
+
+
+
+
+
+
+
 
     const link = document.createElement('a');
-    link.href = url;
-    link.download = `chat-history-${Date.now()}.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  }, [chatHistories]);
 
-  const importFromJSON = useCallback(
-    async (file: File) => {
-      return new Promise<void>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          try {
-            const importedChats = JSON.parse(e.target?.result as string) as ChatHistory[];
-            setChatHistories(importedChats);
-            if (importedChats.length > 0) {
-              setCurrentChatId(importedChats[0].id);
-            }
-            resolve();
-          } catch (error) {
-            reject(new Error('Invalid JSON file'));
-          }
-        };
-        reader.onerror = () => reject(new Error('Failed to read file'));
-        reader.readAsText(file);
-      });
-    },
-    [setChatHistories, setCurrentChatId]
-  );
 
-  return {
-    chatHistories,
-    currentChatId,
-    setCurrentChatId,
-    createNewChat,
-    updateChatMessages,
-    deleteChat,
-    clearAllChats,
-    getCurrentChat,
-    exportToJSON,
-    importFromJSON,
-  };
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
