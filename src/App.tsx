@@ -9,6 +9,7 @@ import { ChatSidebar } from '@/components/ChatSidebar';
 import { ModelLoading } from '@/components/ModelLoading';
 import { ErrorState } from '@/components/ErrorState';
 import { Toaster, toast } from 'sonner';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 function App() {
   const { status, loadProgress, error, generate, resetEngine, initializeEngine } = useLLM();
@@ -24,9 +25,10 @@ function App() {
     importFromJSON,
   } = useChatHistory();
 
+  const isMobile = useIsMobile();
   const [messages, setMessages] = useState<Message[]>([]);
   const [streamingMessageId, setStreamingMessageId] = useState<string | undefined>();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!currentChatId || !chatHistories) {
@@ -40,6 +42,14 @@ function App() {
       setMessages([]);
     }
   }, [currentChatId, chatHistories]);
+
+  useEffect(() => {
+    if (!isMobile) {
+      setIsSidebarOpen(true);
+    } else {
+      setIsSidebarOpen(false);
+    }
+  }, [isMobile]);
 
 
 

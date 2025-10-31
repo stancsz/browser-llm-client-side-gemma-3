@@ -147,25 +147,25 @@ export function ChatInput({ onSend, disabled = false, placeholder = 'Type your m
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
             disabled={disabled}
-            className="pr-20 text-[15px] resize-none min-h-[44px] max-h-[200px]"
+            className="pr-24 md:pr-20 text-[15px] md:text-base resize-none min-h-[52px] md:min-h-[44px] max-h-[200px]"
             autoComplete="off"
             rows={1}
           />
-          <div className="absolute bottom-2 right-2 flex gap-1">
+          <div className="absolute bottom-2 right-2 flex gap-0.5">
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={disabled}
-              className="p-2 text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="p-3 md:p-2 text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation"
             >
-              <Paperclip className="w-5 h-5" />
+              <Paperclip className="w-5 h-5 md:w-5 md:h-5" />
             </button>
             <button
               type="submit"
               disabled={disabled || (!input.trim() && attachments.length === 0)}
-              className="p-2 text-accent hover:text-accent/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="p-3 md:p-2 text-accent hover:text-accent/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation"
             >
-              <PaperPlaneRight className="w-5 h-5" />
+              <PaperPlaneRight className="w-5 h-5 md:w-5 md:h-5" />
             </button>
           </div>
         </div>
