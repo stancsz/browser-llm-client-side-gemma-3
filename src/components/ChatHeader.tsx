@@ -1,16 +1,18 @@
 import { ModelStatus } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Trash, Warning, CircleNotch } from '@phosphor-icons/react';
+import { Trash, Warning, CircleNotch, List } from '@phosphor-icons/react';
 import { Separator } from '@/components/ui/separator';
 
 interface ChatHeaderProps {
   status: ModelStatus;
   onClear: () => void;
   messageCount: number;
+  onToggleSidebar: () => void;
+  isSidebarOpen: boolean;
 }
 
-export function ChatHeader({ status, onClear, messageCount }: ChatHeaderProps) {
+export function ChatHeader({ status, onClear, messageCount, onToggleSidebar, isSidebarOpen }: ChatHeaderProps) {
   const getStatusBadge = () => {
     switch (status) {
       case 'ready':
@@ -52,9 +54,18 @@ export function ChatHeader({ status, onClear, messageCount }: ChatHeaderProps) {
   return (
     <div className="border-b border-border bg-card">
       <div className="px-4 py-4 flex items-center justify-between">
-        <div className="space-y-1">
-          <h1 className="text-2xl font-semibold tracking-tight">GemmaChat</h1>
-          <p className="text-sm text-muted-foreground">Free, private AI chat • 100% client-side • Your data never leaves your device</p>
+        <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onToggleSidebar}
+          >
+            <List size={24} />
+          </Button>
+          <div className="space-y-1">
+            <h1 className="text-2xl font-semibold tracking-tight">GemmaChat</h1>
+            <p className="text-sm text-muted-foreground hidden sm:block">Free, private AI chat • 100% client-side • Your data never leaves your device</p>
+          </div>
         </div>
         <div className="flex items-center gap-3">
           {getStatusBadge()}

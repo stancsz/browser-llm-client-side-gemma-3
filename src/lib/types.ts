@@ -5,6 +5,14 @@ export interface Message {
   timestamp: number;
 }
 
+export interface ChatHistory {
+  id: string;
+  title: string;
+  messages: Message[];
+  createdAt: number;
+  updatedAt: number;
+}
+
 export interface ModelLoadProgress {
   progress: number;
   text: string;
